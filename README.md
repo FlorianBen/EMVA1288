@@ -1,4 +1,4 @@
-# Calibration des caméra ESS avec le standard EMVA 1288
+# Calibration des caméras ESS avec le standard EMVA 1288
 
 ## Introduction
 
