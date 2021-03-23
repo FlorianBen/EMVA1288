@@ -11,6 +11,26 @@ La calibration se fera suivant le standard EMVA 1288 car celui-ci reste simple e
 ## EMVA 1288
 
 ## Setup
+### Camera
+
+La caméra utilisée est la Blackfly BFLY-PGE-23S6M de chez FLIR (anciennement Point Grey).
+Elle est basée sur le capteur CMOS IMX249 de chez Sony, dont les caractéristiques générales sont données dans le tableau suivant :
+| Property             | Value                      |
+| -------------------- | -------------------------- |
+| Resolution           | 1936 (H)\,\times\,1216 (V) |
+| Pixel size           | 5.86 $\mu m$               |
+| Sensor diagonal size | 13.4 mm (Type 1/1.2)       |
+| Well capacity        | 32000 $e^-$-               |
+| Dynamic Range        | 70 dB                      |
+| QE at 525 nm         | 70 \%                      |
+| Electrons noise      | 6.8 $e^-$                  |
+| ADC                  | 8, 10 or 12 bits           |
+| Max frame rate       | 30 fps                     |
+
+On souhaite vérifier et avoir des caractéristiques réaliste du capteur.
+
+La caméra est pilotable via un support EPICS, voir [ici](resources/epics/README.md).
+
 ### Calibration
 
 Le montage de calibration n'est pas optimal mais il est simple et peu onéreux.
