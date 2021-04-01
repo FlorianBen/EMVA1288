@@ -11,7 +11,10 @@ La calibration se fera suivant le standard EMVA 1288 car celui-ci reste simple e
 
 ## EMVA 1288
 
-Le document EMVA 1288 propose une caractérisation standardisée des détecteurs optiques.
+Le document EMVA 1288 propose une caractérisation standardisée des détecteurs optiques pixelisés. 
+Les premières versions du standard ne s'appliquaient qu'aux capteurs à réponse linéaire.
+Depuis la version 4 du standard, il est possible de caractériser des capteurs à réponse non linéaire.
+Les différents standards sont disponibles dans le répertoire `ressource/emva1288`.
 
 ## Setup
 
@@ -19,6 +22,7 @@ Le document EMVA 1288 propose une caractérisation standardisée des détecteurs
 
 La caméra utilisée est la Blackfly BFLY-PGE-23S6M de chez FLIR (anciennement Point Grey).
 Elle est basée sur le capteur CMOS IMX249 de chez Sony, dont les caractéristiques générales sont données dans le tableau suivant :
+
 | Property             | Value                |
 | -------------------- | -------------------- |
 | Resolution           | 1936 (H),1216 (V)    |
@@ -26,7 +30,7 @@ Elle est basée sur le capteur CMOS IMX249 de chez Sony, dont les caractéristiq
 | Sensor diagonal size | 13.4 mm (Type 1/1.2) |
 | Well capacity        | 32000 électrons      |
 | Dynamic Range        | 70 dB                |
-| QE at 525 nm         | 70 \%                |
+| QE at 525 nm         | 70 %                 |
 | Electrons noise      | 6.8 électrons        |
 | ADC                  | 8, 10 or 12 bits     |
 | Max frame rate       | 30 fps               |
