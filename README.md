@@ -8,24 +8,28 @@ Une fois arrivé le MCP est retesté pour vérifier son bon fonctionnement.
 Sans calibration des caméras, les courbes de gain sont exprimées en unité arbitraire. 
 L'objectif de la calibration des caméras est de pouvoir donner une courbe de gain la plus absolue possible.
 La calibration se fera suivant le standard EMVA 1288 car celui-ci reste simple et accessible.
+
 ## EMVA 1288
 
+Le document EMVA 1288 propose une caractérisation standardisée des détecteurs optiques.
+
 ## Setup
+
 ### Camera
 
 La caméra utilisée est la Blackfly BFLY-PGE-23S6M de chez FLIR (anciennement Point Grey).
 Elle est basée sur le capteur CMOS IMX249 de chez Sony, dont les caractéristiques générales sont données dans le tableau suivant :
-| Property             | Value                      |
-| -------------------- | -------------------------- |
-| Resolution           | 1936 (H)\,\times\,1216 (V) |
-| Pixel size           | 5.86 $\mu m$               |
-| Sensor diagonal size | 13.4 mm (Type 1/1.2)       |
-| Well capacity        | 32000 $e^-$-               |
-| Dynamic Range        | 70 dB                      |
-| QE at 525 nm         | 70 \%                      |
-| Electrons noise      | 6.8 $e^-$                  |
-| ADC                  | 8, 10 or 12 bits           |
-| Max frame rate       | 30 fps                     |
+| Property             | Value                |
+| -------------------- | -------------------- |
+| Resolution           | 1936 (H),1216 (V)    |
+| Pixel size           | 5.86 µm              |
+| Sensor diagonal size | 13.4 mm (Type 1/1.2) |
+| Well capacity        | 32000 électrons      |
+| Dynamic Range        | 70 dB                |
+| QE at 525 nm         | 70 \%                |
+| Electrons noise      | 6.8 électrons        |
+| ADC                  | 8, 10 or 12 bits     |
+| Max frame rate       | 30 fps               |
 
 On souhaite vérifier et avoir des caractéristiques réaliste du capteur.
 
