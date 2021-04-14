@@ -23,11 +23,13 @@ def var_grey_value(images):
     Returns:
         float : Temporal variance of the grey value.
     """
-    temp = (images[0]-images[1])**2 - 0.5 * (np.mean(images[0])-np.mean(images[1]))**2
+    temp = (images[0]-images[1])**2 - 0.5 * \
+        (np.mean(images[0])-np.mean(images[1]))**2
     pix_var = np.sum(temp)/np.size(images)
     return pix_var
 
-def compute_snr(images,dark):
+
+def compute_snr(images, dark):
     """Compute the Signal to Noise ratio of an image.
 
     Args:
@@ -35,7 +37,8 @@ def compute_snr(images,dark):
         dark (ndarray): Dark frames, two images should be provided.
 
     Returns:
-        snr: Signal to Noise ratio
+        float: Signal to Noise ratio
     """
-    snr = (mean_grey_value(images)-mean_grey_value(dark))/var_grey_value(images)
+    snr = (mean_grey_value(images)-mean_grey_value(dark)) / \
+        var_grey_value(images)
     return snr
