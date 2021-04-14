@@ -42,6 +42,40 @@ def compute_snr(images, dark):
     snr = (mean_grey_value(images)-mean_grey_value(dark)) / \
         var_grey_value(images)
     return snr
+
+
+def temporal_variance(images):
+    """Compute the temporal variance image from several images.
+
+    Args:
+        images (ndarray): Input images (3D data).
+
+    Returns:
+        ndarray: Temporal variance images.
+    """
+    if images.ndim == 3:
+        return np.var(images, axis=0, ddof=1)
+    else:
+        raise TypeError("The input should be a 3D array")
+
+
+def spatial_variance(images):
+    """Compute the spatial variance from one or several images.
+
+    Args:
+        images (ndarray): Input image or images.
+
+    Returns:
+        float or ndarray: Spatial variance.
+    """
+    if images.ndim == 3:
+        return np.var(images, axis=(1, 2))
+    elif images.ndim == 2:
+        return np.var(images)
+    else:
+        raise TypeError("The input should be a 2D or 3D array")
+
+
 def B3spline(x):
     """Compute B-Spline function defined in the EMVA 1288 standard.
 
