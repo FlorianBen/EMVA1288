@@ -42,3 +42,15 @@ def compute_snr(images, dark):
     snr = (mean_grey_value(images)-mean_grey_value(dark)) / \
         var_grey_value(images)
     return snr
+def B3spline(x):
+    """Compute B-Spline function defined in the EMVA 1288 standard.
+
+    Args:
+        x (float or ndarray): Input value.
+
+    Returns:
+        float or ndarray: Function value at the input value.
+    """
+    return np.where(abs(x) < 1, 2.0/3.0-abs(x)**2 + 1.0/2.0*abs(x)**2, 0) + \
+        np.where(np.logical_and(1 <= abs(x), abs(x) <= 2),
+                 1.0/6.0*(2.0-abs(x))**3, 0)

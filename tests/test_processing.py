@@ -22,3 +22,8 @@ class TestProcessing:
     def test_snr(self):
         # TODO: Implement
         assert 1 == 1
+
+    def test_BSpline3_function(self):
+        x = 0.0
+        y = proc.B3spline(x)
+        assert 2.0/3.0 == pytest.approx(y)
