@@ -30,3 +30,9 @@ def load_hdf5(filename):
     except (OSError):
         logging.exception('Unable to open file')
         sys.exit(1)
+
+def load_png():
+    pass
+
+def load_bpm():
+    pass

@@ -1,4 +1,6 @@
+from matplotlib.colors import cnames
 import numpy as np
+from scipy.ndimage import convolve
 
 
 def mean_grey_value(images):
@@ -88,3 +90,33 @@ def B3spline(x):
     return np.where(abs(x) < 1, 2.0/3.0-abs(x)**2 + 1.0/2.0*abs(x)**2, 0) + \
         np.where(np.logical_and(1 <= abs(x), abs(x) <= 2),
                  1.0/6.0*(2.0-abs(x))**3, 0)
+
+
+def hist_image(image, nbits):
+    """Compute the histogram for the given image.
+
+    Args:
+        image (ndarry): Input image
+        nbits (int): Deepth of pixel in bit.
+
+    Returns:
+        tuple: histogram values and bins
+    """
+    bins = np.linspace(0, 2**nbits-1, 2**nbits)
+    valbins, _ = np.histogram(image, bins)
+    return valbins, bins
+
+
+def box_filter(image, size):
+    filter = np.ones(size)
+    filter = filter/filter.size
+    out = convolve(image, filter)
+    return out
+
+
+def binomial_filter(image, dim):
+    base = np.array([1, 1])
+    dim = dim-2
+    for i in range(dim):
+        base = np.convolve(base, base)
+    
