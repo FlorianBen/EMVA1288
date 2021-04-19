@@ -108,13 +108,28 @@ def hist_image(image, nbits):
 
 
 def box_filter(image, size):
-    filter = np.ones(size)
+    """Apply box filter to an image.
+
+    Args:
+        image (ndarray): Input image.
+        size (int): Dimension of the filter.
+
+    Returns:
+        ndarray: Filtered image.
+    """
+    filter = np.ones((size,size))
     filter = filter/filter.size
     out = convolve(image, filter)
     return out
 
 
 def binomial_filter(image, dim):
+    """Apply binomial filter to an image.
+
+    Args:
+        image (ndarray): Input image to filter.
+        dim (int): Filter dimension.
+    """
     base = np.array([1, 1])
     dim = dim-2
     for i in range(dim):
