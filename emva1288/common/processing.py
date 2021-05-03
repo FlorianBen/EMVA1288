@@ -117,7 +117,7 @@ def box_filter(image, size):
     Returns:
         ndarray: Filtered image.
     """
-    filter = np.ones((size,size))
+    filter = np.ones((size, size))
     filter = filter/filter.size
     out = convolve(image, filter)
     return out
@@ -131,7 +131,28 @@ def binomial_filter(image, dim):
         dim (int): Filter dimension.
     """
     base = np.array([1, 1])
-    dim = dim-2
-    for i in range(dim):
-        base = np.convolve(base, base)
-    
+    prev = base
+    dim_v = dim-2
+    mat = np.zeros((dim, dim))
+    for i in range(dim_v):
+        prev = np.convolve(base, prev)
+    mat[int(dim/2), :] = prev
+    mat[:, int(dim/2)] = prev
+    mat = mat/np.sum(mat)
+    out = convolve(image, mat)
+    return out
+
+def scale(image, nbitsin, nbitsout):
+    """Scale the image.
+
+    Args:
+        image (ndarray): Input image.
+        nbitsin (int): Deepth of the input image in bits.
+        nbitsout (int): Depth of the output image.
+
+    Returns:
+        ndarray: Output image.
+    """
+    scale = (2**nbitsin)/(2**nbitsout)
+    out = image/scale
+    return out
