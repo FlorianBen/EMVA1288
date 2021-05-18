@@ -142,6 +142,7 @@ def binomial_filter(image, dim):
     out = convolve(image, mat)
     return out
 
+
 def scale(image, nbitsin, nbitsout):
     """Scale the image.
 
@@ -156,3 +157,25 @@ def scale(image, nbitsin, nbitsout):
     scale = (2**nbitsin)/(2**nbitsout)
     out = image/scale
     return out
+
+
+def roi_image(images, roi):
+    """Select a Region of Interest (ROI) in the image.
+
+    Args:
+        images (ndarray): Input image.
+        roi (ndarray): ROI coordinates ((x,y),(stepx,stepy)).
+
+    Raises:
+        TypeError: Incorrect image dimension.
+
+    Returns:
+        ndarray: Output ROI images.
+    """
+    if images.ndim == 3:
+        return images[:, roi[0, 1]:roi[1, 1], roi[0, 0]:roi[1, 0]]
+    elif images.ndim == 2:
+        return images[roi[0, 1]:roi[1, 1], roi[0, 0]:roi[1, 0]]
+    else:
+        raise TypeError(
+            'Input image must be a 2D image or 3D array of images !')
