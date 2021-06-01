@@ -223,7 +223,7 @@ def fun_init_helper_lin(x_data, y_data):
     a = (y_max-y_min)/(x_max-x_min)
     b = a*x_min-y_min
 
-    return a, b
+    return b, a
 
 
 def fun_exp(x, *p):
