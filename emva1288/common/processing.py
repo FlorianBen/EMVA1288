@@ -1,6 +1,9 @@
+import logging
 from matplotlib.colors import cnames
 import numpy as np
+from numpy import ma
 from scipy.ndimage import convolve
+from scipy import optimize
 
 
 def mean_grey_value(images):
@@ -179,3 +182,63 @@ def roi_image(images, roi):
     else:
         raise TypeError(
             'Input image must be a 2D image or 3D array of images !')
+
+
+def check_uniformity(image, filtering=True):
+    if filtering:
+        image = box_filter(image, 3)
+        image = box_filter(image, 7)
+
+    max = np.max(image)
+    min = np.min(image)
+    mean = np.mean(image)
+    E = (max-min)/mean*100
+    return E
+
+
+def map_uniformity(image, filtering=True):
+    if filtering:
+        image = box_filter(image, 3)
+        image = box_filter(image, 7)
+
+    max = np.max(image)
+    min = np.min(image)
+
+    map = image  # - min
+    map = 1.0/(map / np.min(map))
+
+    return map
+
+
+def fun_lin(x, *p):
+    return p[0] + p[1]*x
+
+
+def fun_init_helper_lin(x_data, y_data):
+    x_min = np.min(x_data)
+    x_max = np.max(x_data)
+    y_min = np.min(y_data)
+    y_max = np.max(y_data)
+
+    a = (y_max-y_min)/(x_max-x_min)
+    b = a*x_min-y_min
+
+    return a, b
+
+
+def fun_exp(x, *p):
+    return p[0] + p[1]*np.exp(p[2]*x)
+
+
+def fit_curve(x_data, y_data, fun=fun_lin, range=(0, 100)):
+    x_min = np.min(x_data)
+    x_max = np.max(x_data)
+
+    index_w = (x_data <= x_max*range[1]/100)*(x_data >= x_max*range[0]/100)
+    y_data_w = y_data[index_w]
+    x_data_w = x_data[index_w]
+
+    popt, pcov = optimize.curve_fit(
+        fun, x_data_w, y_data_w, fun_init_helper_lin(x_data_w, y_data_w))
+
+    return popt, pcov
