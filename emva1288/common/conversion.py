@@ -13,7 +13,7 @@ def photon_integration(W, t):
 
 
 def area_sensor(val, diameter=0.0095):
-    sensor_surf = 2 * np.pi * diameter/2
+    sensor_surf = np.pi * (diameter/2)**2
     return val/sensor_surf
 
 
