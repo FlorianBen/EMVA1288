@@ -185,6 +185,15 @@ def roi_image(images, roi):
 
 
 def check_uniformity(image, filtering=True):
+    """Check the uniformity of an image.
+
+    Args:
+        image (ndarray): 2D input image.
+        filtering (bool, optional): Smooth image using filters. Defaults to True.
+
+    Returns:
+        float: The uniformity in %.
+    """
     if filtering:
         image = box_filter(image, 3)
         image = box_filter(image, 7)
@@ -197,6 +206,15 @@ def check_uniformity(image, filtering=True):
 
 
 def map_uniformity(image, filtering=True):
+    """Create a map of the uniformity.
+
+    Args:
+        image (ndarray): 2D input image.
+        filtering (bool, optional): Smooth image using filters. Defaults to True.
+
+    Returns:
+        ndarray: Uniformity map.
+    """
     if filtering:
         image = box_filter(image, 3)
         image = box_filter(image, 7)
@@ -211,10 +229,27 @@ def map_uniformity(image, filtering=True):
 
 
 def fun_lin(x, *p):
+    """Linear function for fitting purpose.
+
+    Args:
+        x (float): x value.
+
+    Returns:
+        float: f(x).
+    """
     return p[0] + p[1]*x
 
 
 def fun_init_helper_lin(x_data, y_data):
+    """Helper function for the fitting routine. Compute the initial value.
+
+    Args:
+        x_data (ndarray): 1D array of the x values.
+        y_data (ndarray): 1D array of the y values.
+
+    Returns:
+        float: Initial values.
+    """
     x_min = np.min(x_data)
     x_max = np.max(x_data)
     y_min = np.min(y_data)
@@ -227,10 +262,29 @@ def fun_init_helper_lin(x_data, y_data):
 
 
 def fun_exp(x, *p):
+    """Exponential function for fitting purpose.
+
+    Args:
+        x (float): x value.
+
+    Returns:
+        float: f(x).
+    """
     return p[0] + p[1]*np.exp(p[2]*x)
 
 
 def fit_curve(x_data, y_data, fun=fun_lin, range=(0, 100)):
+    """Fit fuction f
+
+    Args:
+        x_data (ndarray): 1D array of the x values.
+        y_data (ndarray): 1D array of the y values.
+        fun (func, optional): Function to fit. Defaults to fun_lin.
+        range (tuple, optional): Range fitting. Defaults to (0, 100).
+
+    Returns:
+        float: Fitting results.
+    """
     x_min = np.min(x_data)
     x_max = np.max(x_data)
 
