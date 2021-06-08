@@ -158,7 +158,7 @@ def scale(image, nbitsin, nbitsout):
         ndarray: Output image.
     """
     scale = (2**nbitsin)/(2**nbitsout)
-    out = image/scale
+    out = image/scale - 1
     return out
 
 
