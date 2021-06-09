@@ -146,6 +146,24 @@ def binomial_filter(image, dim):
     return out
 
 
+def emva_filter(image):
+    """Apply the emva filtering sequence on a image
+
+    Args:
+        image (ndarray): Input image to filter.
+
+    Returns:
+        ndarray: Filtered image.
+    """
+    out = box_filter(image, 7)
+    out = box_filter(out, 11)
+    out = binomial_filter(out, 3)
+
+    out = image - out
+
+    return out
+
+
 def scale(image, nbitsin, nbitsout):
     """Scale the image.
 
