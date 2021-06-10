@@ -8,9 +8,17 @@ import emva1288.common.processing as proc
 import emva1288.common.input as inp
 import emva1288.common.conversion as conv
 
+
 def main():
-    size = [13, 13, 13]
-    dir = ['/Gain_001/', '/Gain_002/', 'Gain_003/']
+    """Mesure de
+    """
+    size = [13, 13, 13, 13, 13, 13]
+    dir = ['/Gain_000/2021_06_09_exposuretime0_',
+           '/Gain_007/2021_06_09_exposuretime7_',
+           '/Gain_015/2021_06_09_exposuretime15_',
+           '/Gain_020/2021_06_09_exposuretime20_',
+           '/Gain_025/2021_06_09_exposuretime25_',
+           '/Gain_030/2021_06_09_exposuretime30_']
     index_im = np.array([0, 1])
     bits = 10
 
@@ -18,9 +26,9 @@ def main():
         res = np.zeros((size[ind], 4))
         for i in range(size[ind]):
             data, _, _, _ = inp.load_hdf5(
-                inp.DATA_DIR + '2021_06_08/Exposure/' + name + '2021_06_08_exposure_' + str(i).zfill(3) + '.h5')
+                inp.DATA_DIR + '2021_06_09/Exposure/' + name + str(i).zfill(3) + '.h5')
             offset = inp.load_hdf5_attribute(
-                inp.DATA_DIR + '2021_06_08/Exposure/' + name + '2021_06_08_exposure_' + str(i).zfill(3) + '.h5', 'AcquireTime')
+                inp.DATA_DIR + '2021_06_09/Exposure/' + name + str(i).zfill(3) + '.h5', 'AcquireTime')
 
             images = proc.scale(data[index_im], 16, bits)
 
@@ -32,9 +40,10 @@ def main():
             res[i, 2] = u_y
             res[i, 3] = s_y
 
-        plt.semilogx(res[:, 1], res[:, 3],'-x')
+        plt.plot(res[:, 1], res[:, 2], '-x')
 
     plt.show()
+
 
 if __name__ == "__main__":
     # execute only if run as a script
