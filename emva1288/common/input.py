@@ -16,34 +16,28 @@ def load_hdf5(filename):
         (ndarray): Images data.
     """
     try:
-        logging.info('Try to open file {}'.format(filename))
         file = h5py.File(filename, 'r')
-        logging.info('File open: done')
         data = file['entry/data/data'][:]
         timestamp = file['entry/instrument/NDAttributes/NDArrayTimeStamp'][:]
         time_s = file['entry/instrument/NDAttributes/NDArrayEpicsTSSec'][:]
         time_ns = file['entry/instrument/NDAttributes/NDArrayEpicsTSnSec'][:]
-        logging.info('Read data: done')
         file.close()
-        logging.info('File is close '.format(filename))
         return data, timestamp, time_s, time_ns
     except (OSError):
         logging.exception('Unable to open file')
         sys.exit(1)
 
+
 def load_hdf5_attribute(filename, attribute_name):
     try:
-        logging.info('Try to open file {}'.format(filename))
         file = h5py.File(filename, 'r')
-        logging.info('File open: done')
-        attribute = file['entry/instrument/NDAttributes/'+ attribute_name][:]
-        logging.info('Read data: done')
+        attribute = file['entry/instrument/NDAttributes/' + attribute_name][:]
         file.close()
-        logging.info('File is close '.format(filename))
         return attribute
     except (OSError):
         logging.exception('Unable to open file')
-        sys.exit(1) 
+        sys.exit(1)
+
 
 def load_png(filename):
     """Load data image from a PNG image.

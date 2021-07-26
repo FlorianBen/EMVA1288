@@ -165,7 +165,7 @@ def emva_filter(image):
 
 
 def scale(image, nbitsin, nbitsout):
-    """Scale the image.
+    """Scale the image according to the bit depth.
 
     Args:
         image (ndarray): Input image.
