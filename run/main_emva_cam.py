@@ -56,7 +56,7 @@ def main():
         nphoton = conv.photon_total(energy, wavelenght)
         nphoton_pm = conv.area_sensor(nphoton)
         nphoton_ppix = nphoton_pm * (5.85e-6*5.85e-6) - nphoton_ppix_zero
-        print('{} = {}'.format(i, nphoton_ppix))
+        print('Image pair {} => {:3e} = {:3e}'.format(i, power, nphoton_ppix))
 
         data, _, _, _ = inp.load_hdf5(
             inp.DATA_DIR + '2021_06_22/EMVA/cam1/' + '2021_06_22_EMVA_' + str(i).zfill(3) + '.h5')
@@ -64,11 +64,6 @@ def main():
         images = proc.roi_image(data[index_im], roi)
 
         hist, bins = proc.hist_image(images, bits)
-
-        # print(proc.check_uniformity(images))
-
-        # plt.step(bins[0:-1], hist, where='post')
-        # plt.show()
 
         u_y = proc.mean_grey_value(images)
         s_y = proc.var_grey_value(images)
